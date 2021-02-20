@@ -37,7 +37,7 @@ $wgResourceBasePath = $wgScriptPath;
 
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogos = ['1x' => "$wgResourceBasePath/resources/assets/wiki.png"];
+$wgLogo = $wgScriptPath . '/images/logo.png';
 
 ## UPO means: this is also a user preference option
 
@@ -74,7 +74,7 @@ $wgMemCachedServers = [];
 
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
-$wgEnableUploads = false;
+$wgEnableUploads = true;
 $wgUseImageMagick = true;
 $wgImageMagickConvertCommand = "/usr/bin/convert";
 
@@ -136,6 +136,10 @@ wfLoadSkin('Vector');
 # End of automatically generated settings.
 # Add more configuration options below.
 
+#################################################################################################################################
+######################### OAUTH GAMMA ###########################################################################################
+#################################################################################################################################
+
 wfLoadExtension('MW-OAuth2Client');
 
 $wgOAuth2Client['client']['id']     = $_ENV["CLIENT_ID"]; // The client ID assigned to you by the provider
@@ -157,3 +161,45 @@ $wgOAuth2Client['configuration']['scopes'] = '';
 
 $wgOAuth2Client['configuration']['http_bearer_token'] = 'Bearer'; // Token to use in HTTP Authentication
 $wgOAuth2Client['configuration']['query_parameter_token'] = 'auth_token'; // query parameter to use
+
+#################################################################################################################################
+######################### digITDefault ##########################################################################################
+#################################################################################################################################
+
+# Whitelist oauth login page
+$wgWhitelistRead = ['Special:OAuth2Client', 'Special:OAuth2Client/redirect'];
+
+
+# Allow normal users to move pages etc.
+$wgGroupPermissions['user']['move'] = true;
+$wgGroupPermissions['user']['move-subpages'] = true;
+$wgGroupPermissions['user']['upload'] = true;
+$wgGroupPermissions['user']['reupload'] = true;
+$wgGroupPermissions['user']['delete'] = true;
+$wgGroupPermissions['user']['undelete'] = true;
+$wgGroupPermissions['user']['bigdelete'] = true;
+$wgGroupPermissions['user']['deletedhistory'] = true;
+$wgGroupPermissions['user']['deletedtext'] = true;
+
+$wgGroupPermissions['*']['createaccount'] = false;
+$wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['*']['read'] = false;
+
+## The relative URL path to the logo.  Make sure you change this from the default,
+## or else you'll overwrite your logo when you upgrade!
+
+$wgEnotifUserTalk = false; # UPO
+$wgEnotifWatchlist = false; # UPO
+$wgEnableEmail = false;
+$wgEnableUserEmail = false; # UPO
+$wgEmergencyContact = "digit@chalmers.it";
+$wgPasswordSender = "digit@chalmers.it";
+
+$wgHashedUploadDirectory = true;
+$wgHashedSharedUploadDirectory = true;
+
+$wgCapitalLinks = false;
+
+$wgFileExtensions = array(
+	'png', 'jpg', 'tiff', 'bmp', 'jpeg', 'gif', 'pdf', 'ppt', 'tar.gz', 'tar', 'doc', 'docx', 'xls', 'xlsx'
+);
