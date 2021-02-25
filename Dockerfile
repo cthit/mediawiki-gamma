@@ -1,7 +1,7 @@
 FROM mediawiki:latest
 
-RUN git clone --depth 1 https://github.com/Swexbe/MW-OAuth2Client.git /var/www/html/extensions/MW-OAuth2Client
-RUN cd /var/www/html/extensions/MW-OAuth2Client && git submodule update --init
+COPY /extensions /var/www/html/extensions
+# RUN cd /var/www/html/extensions/MW-OAuth2Client && git submodule update --init
 
 # Various dependencies for composer
 RUN apt update && apt install zip unzip
@@ -10,6 +10,7 @@ RUN apt update && apt install zip unzip
 RUN php -r "readfile('https://getcomposer.org/installer');" | php
 RUN mv composer.phar /usr/local/bin/composer
 
-RUN cd /var/www/html/extensions/MW-OAuth2Client/vendors/oauth2-client && composer install
+# 
+RUN cd /var/www/html/extensions/MW-OAuth2Client-Gamma/vendors/oauth2-client && composer install
 
 COPY ./LocalSettings.php /var/www/html/
