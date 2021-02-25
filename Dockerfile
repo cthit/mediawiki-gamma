@@ -1,4 +1,4 @@
-FROM mediawiki:latest
+FROM mediawiki:1.35
 
 COPY /extensions /var/www/html/extensions
 # RUN cd /var/www/html/extensions/MW-OAuth2Client && git submodule update --init
