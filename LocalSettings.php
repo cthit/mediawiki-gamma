@@ -140,7 +140,7 @@ wfLoadSkin('Vector');
 ######################### OAUTH GAMMA ###########################################################################################
 #################################################################################################################################
 
-wfLoadExtension('MW-OAuth2Client');
+wfLoadExtension('MW-OAuth2Client-Gamma');
 
 $wgOAuth2Client['client']['id']     = $_ENV["CLIENT_ID"]; // The client ID assigned to you by the provider
 $wgOAuth2Client['client']['secret'] = $_ENV["CLIENT_SECRET"]; // The client secret assigned to you by the provider
@@ -203,3 +203,6 @@ $wgCapitalLinks = false;
 $wgFileExtensions = array(
 	'png', 'jpg', 'tiff', 'bmp', 'jpeg', 'gif', 'pdf', 'ppt', 'tar.gz', 'tar', 'doc', 'docx', 'xls', 'xlsx'
 );
+
+# https://www.mediawiki.org/wiki/Topic:W1xkngh7z9r8xh6v
+$wgDisableOutputCompression  = true;
