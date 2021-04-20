@@ -27,7 +27,7 @@ $wgMetaNamespace = $_ENV["WIKI_NAME"];
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = $_ENV["PATH"];
+$wgScriptPath = $_ENV["WIKI_PATH"];
 
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = $_ENV["ROOT_URL"];
@@ -142,8 +142,8 @@ wfLoadSkin('Vector');
 
 wfLoadExtension('MW-OAuth2Client-Gamma');
 
-$wgOAuth2Client['client']['id']     = $_ENV["CLIENT_ID"]; // The client ID assigned to you by the provider
-$wgOAuth2Client['client']['secret'] = $_ENV["CLIENT_SECRET"]; // The client secret assigned to you by the provider
+$wgOAuth2Client['client']['id']     = $_ENV["GAMMA_CLIENT_ID"]; // The client ID assigned to you by the provider
+$wgOAuth2Client['client']['secret'] = $_ENV["GAMMA_CLIENT_SECRET"]; // The client secret assigned to you by the provider
 
 $wgOAuth2Client['configuration']['authorize_endpoint']     = $_ENV["GAMMA_AUTH"]; // Authorization URL
 $wgOAuth2Client['configuration']['access_token_endpoint']  = $_ENV["GAMMA_TOKEN"]; // Token URL

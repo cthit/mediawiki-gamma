@@ -1,115 +1,64 @@
 version: "3"
-networks:
-  gamma:
 services:
-  echo-server:
-    image: ealen/echo-server
+  wiki:
+    build:
+      context: mediawiki
+      dockerfile: Dockerfile
+    image: cthit/mediawiki:latest
+    environment:
+      GAMMA_CLIENT_ID: OwjtOwnraqUbJEuvdpQ7YTBbIyII4OA11fB4b1woqvVPKxLiQzZ8dl4Alz1WFbHZGpCcBoDhzdm
+      GAMMA_CLIENT_SECRET: 3bkxqBQk3POPeEYK8Mbsfu1rw6FhQaNARpfLXe4Cio84FVMSeo1va73TLbPkbtNGFxyhgnm7Q3F
+      GAMMA_AUTH: http://localhost:3000/api/oauth/authorize
+      GAMMA_TOKEN: http://gamma-backend:8081/api/oauth/token
+      GAMMA_USER: http://gamma-backend:8081/api/users/me
+      GAMMA_REDIRECT: http://localhost:4000/wiki/index.php/Special:OAuth2Client/callback
+      GAMMA_AUTHORITY: admin
+      WIKI_NAME: digITpedia
+      WIKI_PATH: /wiki
+      DB_SERVER: wiki-db
+      DB_NAME: wiki
+      DB_USER: wiki
+      DB_PASSWORD: wiki
+      DB_PREFIX: ""
+      SECRET_KEY: dasdasdasd
+      UPGRADE_KEY: dasd
+      ROOT_URL: http://localhost:4000
     networks:
+      - default
       - gamma
-  digit-wiki:
+    ports:
+      - 4001:80
     volumes:
       - ./images:/var/www/html/images
-      # After initial setup, download LocalSettings.php to the same directory as
-      # this yaml and uncomment the following line and use compose to restart
-      # the mediawiki service
-      - ./LocalSettings.php:/var/www/html/LocalSettings.php
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    image: digit-wiki:prod
-    environment:
-      CLIENT_ID: "id"
-      CLIENT_SECRET: "secret"
-      GAMMA_AUTH: "http://localhost:3000/api/oauth/authorize"
-      GAMMA_TOKEN: "http://gamma-backend:8081/api/oauth/token"
-      GAMMA_USER: "http://gamma-frontend:3000/api/users/me"
-      GAMMA_REDIRECT: "http://localhost:4000/index.php/Special:OAuth2Client/callback"
-      GAMMA_AUTHORITY: "admin"
-      WIKI_NAME: "digIT"
-      DB_SERVER: "wiki-db"
-      DB_NAME: "mysql"
-      DB_USER: "user"
-      DB_PASSWORD: "password"
-      SECRET_KEY: "dasdasdasd"
-      UPGRADE_KEY: "dasd"
-      ROOT_URL: "http://localhost:4000/"
 
+  wiki-proxy:
+    build:
+      context: proxy
+      dockerfile: Dockerfile
+    environment:
+      WIKI_DOMAIN: localhost
+      WIKI_PATH: wiki
+      WIKI_HOST: wiki
+    image: cthit/mediawiki-proxy:latest
+    networks:
+      - default
     ports:
       - 4000:80
-    networks:
-      - gamma
-    depends_on:
-      - gamma-backend
+
   wiki-db:
-    image: mariadb:latest
+    image: mariadb:10.5
     environment:
-      MYSQL_USER: "user"
-      MYSQL_DATABASE: "mysql"
-      MYSQL_PASSWORD: "password"
+      MYSQL_USER: wiki
+      MYSQL_DATABASE: wiki
+      MYSQL_PASSWORD: wiki
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
     networks:
+      - default
       - gamma
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
 
-  gamma-frontend:
-    image: cthit/gamma-frontend:development
-    environment:
-      HTTP_PROXY: http://gamma-backend:8081
-    depends_on:
-      - gamma-backend
-    networks:
-      - gamma
-    ports:
-      - 3000:3000
-
-  gamma-backend:
-    image: cthit/gamma-backend:development
-    environment:
-      # Default admin user name = admin
-      # Default admin password  = password
-
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_HOST: gamma-db
-      DB_PORT: 5432
-      DB_NAME: postgres
-
-      REDIS_HOST: gamma-redis
-      REDIS_PASSWORD: ""
-      REDIS_PORT: 6379
-
-      GOTIFY_KEY: "123abc"
-      GOTIFY_URL: http://gamma-gotify:8080/mail
-
-      DEFAULT_CLIENT_NAME: demo
-      DEFAULT_CLIENT_ID: id
-      DEFAULT_CLIENT_SECRET: secret
-      DEFAULT_REDIRECT_URI: http://localhost:4000/index.php/Special:OAuth2Client/callback
-
-      SERVER_PORT: 8081
-      SUCCESSFUL_LOGIN: http://localhost:3000
-      CORS_ALLOWED_ORIGIN: http://localhost:3000
-      BACKEND_URI: http://localhost:8081
-      PRODUCTION: "false"
-      COOKIE_DOMAIN: localhost
-      IS_MOCKING_CLIENT: "true"
-    depends_on:
-      - gamma-redis
-      - gamma-db
-    networks:
-      - gamma
-    ports:
-      - 8081:8081
-
-  gamma-redis:
-    image: redis:5.0
-    networks:
-      - gamma
-
-  gamma-db:
-    image: postgres:10
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: password
-    networks:
-      - gamma
+networks:
+  default:
+  gamma:
+    external: true
