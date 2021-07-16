@@ -136,10 +136,11 @@ wfLoadSkin('Vector');
 # End of automatically generated settings.
 # Add more configuration options below.
 
+wfLoadExtension('GetUserName');
+
 #################################################################################################################################
 ######################### OAUTH GAMMA ###########################################################################################
 #################################################################################################################################
-
 wfLoadExtension('MW-OAuth2Client-Gamma');
 
 $wgOAuth2Client['client']['id']     = $_ENV["GAMMA_CLIENT_ID"]; // The client ID assigned to you by the provider
