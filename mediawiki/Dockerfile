@@ -23,4 +23,9 @@ WORKDIR /var/www/html/extensions
 RUN git clone https://github.com/Wikimedica/mediawiki-extensions-GetUserName GetUserName
 WORKDIR /var/www/html/extensions/GetUserName
 RUN git checkout 4306000
+
+# Install ParserFunctions for MediaWiki 1.35
+WORKDIR /tmp
+RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_35-bb4c9d2.tar.gz -o ParserFunctions.tar.gz
+RUN tar -xzf ParserFunctions.tar.gz -C /var/www/html/extensions
 WORKDIR /var/www/html
