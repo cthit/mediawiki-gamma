@@ -156,7 +156,8 @@ $wgOAuth2Client['configuration']['redirect_uri']           = $_ENV["GAMMA_REDIRE
 $wgOAuth2Client['configuration']['username'] = 'cid'; // JSON path to username
 $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 
-$wgOAuth2Client['configuration']['gamma_authority'] = $_ENV["GAMMA_AUTHORITY"]; // Gamma
+$wgOAuth2Client['configuration']['authorized_groups'] = $_ENV["GAMMA_AUTHORIZED_GROUPS"]; // Comma separated list of authorized groups
+// $wgOAuth2Client['configuration']['gamma_authority'] = $_ENV["GAMMA_AUTHORITY"]; // Gamma
 $wgOAuth2Client['configuration']['service_name'] = 'Gamma'; // the name of your service
 $wgOAuth2Client['configuration']['service_login_link_text'] = 'Login with Gamma'; // the text of the login link
 

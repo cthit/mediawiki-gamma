@@ -1,3 +1,0 @@
-[submodule "mediawiki/extensions/MW-OAuth2Client-Gamma"]
-	path = mediawiki/extensions/MW-OAuth2Client-Gamma
-	url = git@github.com:swexbe/MW-OAuth2Client-Gamma

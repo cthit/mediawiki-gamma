@@ -12,7 +12,8 @@ services:
       GAMMA_TOKEN: http://gamma-backend:8081/api/oauth/token
       GAMMA_USER: http://gamma-backend:8081/api/users/me
       GAMMA_REDIRECT: http://localhost:4000/wiki/index.php/Special:OAuth2Client/callback
-      GAMMA_AUTHORITY: admin
+      # GAMMA_AUTHORITY: admin
+      GAMMA_AUTHORIZED_GROUPS: superadmin
       WIKI_NAME: digITpedia
       WIKI_PATH: /wiki
       DB_SERVER: wiki-db
