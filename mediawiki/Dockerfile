@@ -13,7 +13,7 @@ COPY ./LocalSettings.php /var/www/html/
 WORKDIR /var/www/html/extensions
 RUN git clone https://github.com/cthit/MW-OAuth2Client-Gamma
 WORKDIR /var/www/html/extensions/MW-OAuth2Client-Gamma
-RUN git checkout 1bc9b1b
+RUN git checkout 89da9b3
 RUN git submodule update --init --recursive
 WORKDIR /var/www/html/extensions/MW-OAuth2Client-Gamma/vendors/oauth2-client
 RUN composer install
@@ -26,6 +26,6 @@ RUN git checkout 4306000
 
 # Install ParserFunctions for MediaWiki 1.35
 WORKDIR /tmp
-RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_35-7ede1a1.tar.gz -o ParserFunctions.tar.gz
+RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_35-ee8b933.tar.gz -o ParserFunctions.tar.gz
 RUN tar -xzf ParserFunctions.tar.gz -C /var/www/html/extensions
 WORKDIR /var/www/html
