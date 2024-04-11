@@ -1,4 +1,4 @@
-FROM mediawiki:1.39
+FROM mediawiki:1.35
 
 # Various dependencies for composer
 RUN apt update && apt install zip unzip
@@ -32,6 +32,6 @@ RUN git checkout cf26918
 
 # Install ParserFunctions for MediaWiki 1.39
 WORKDIR /tmp
-RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_39-6f79511.tar.gz -o ParserFunctions.tar.gz
+RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_35-47229c6.tar.gz -o ParserFunctions.tar.gz
 RUN tar -xzf ParserFunctions.tar.gz -C /var/www/html/extensions
 WORKDIR /var/www/html
