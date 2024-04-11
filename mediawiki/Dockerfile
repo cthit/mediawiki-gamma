@@ -1,4 +1,4 @@
-FROM mediawiki:1.35
+FROM mediawiki:1.39
 
 # Various dependencies for composer
 RUN apt update && apt install zip unzip
@@ -13,7 +13,7 @@ COPY ./LocalSettings.php /var/www/html/
 WORKDIR /var/www/html/extensions
 RUN git clone https://github.com/cthit/MW-OAuth2Client-Gamma
 WORKDIR /var/www/html/extensions/MW-OAuth2Client-Gamma
-RUN git checkout 89da9b3
+RUN git checkout 5f553cc
 RUN git submodule update --init --recursive
 WORKDIR /var/www/html/extensions/MW-OAuth2Client-Gamma/vendors/oauth2-client
 RUN composer install
@@ -24,8 +24,14 @@ RUN git clone https://github.com/Wikimedica/mediawiki-extensions-GetUserName Get
 WORKDIR /var/www/html/extensions/GetUserName
 RUN git checkout 4306000
 
-# Install ParserFunctions for MediaWiki 1.35
+# Install TitleKey
+WORKDIR /var/www/html/extensions
+RUN git clone https://github.com/wikimedia/mediawiki-extensions-TitleKey TitleKey
+WORKDIR /var/www/html/extensions/TitleKey
+RUN git checkout cf26918
+
+# Install ParserFunctions for MediaWiki 1.39
 WORKDIR /tmp
-RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_35-ee8b933.tar.gz -o ParserFunctions.tar.gz
+RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_39-6f79511.tar.gz -o ParserFunctions.tar.gz
 RUN tar -xzf ParserFunctions.tar.gz -C /var/www/html/extensions
 WORKDIR /var/www/html
