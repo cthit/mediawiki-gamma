@@ -6,14 +6,14 @@ on:
   pull_request:
     branches: [master]
 
-env:
-  WORKFLOW_NODE_VERSION: 20.x
-
 jobs:
   build:
     name: Build docker container
   
     runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
     
     steps:
       -
