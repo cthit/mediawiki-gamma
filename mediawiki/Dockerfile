@@ -24,6 +24,10 @@ RUN git clone https://github.com/Wikimedica/mediawiki-extensions-GetUserName Get
 WORKDIR /var/www/html/extensions/GetUserName
 RUN git checkout 4306000
 
+# Install TitleKey
+WORKDIR /var/www/html/extensions
+RUN git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/TitleKey
+
 # Install ParserFunctions for MediaWiki 1.35
 WORKDIR /tmp
 RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_35-ee8b933.tar.gz -o ParserFunctions.tar.gz
