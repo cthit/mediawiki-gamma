@@ -7,8 +7,6 @@ RUN apt update && apt install zip unzip
 RUN php -r "readfile('https://getcomposer.org/installer');" | php
 RUN mv composer.phar /usr/local/bin/composer
 
-COPY ./LocalSettings.php /var/www/html/
-
 # Install PluggableAuth
 WORKDIR /var/www/html/extensions
 RUN git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/PluggableAuth
@@ -38,3 +36,5 @@ RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_38-
 #RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_39-6f79511.tar.gz -o ParserFunctions.tar.gz
 RUN tar -xzf ParserFunctions.tar.gz -C /var/www/html/extensions
 WORKDIR /var/www/html
+
+COPY ./LocalSettings.php /var/www/html/

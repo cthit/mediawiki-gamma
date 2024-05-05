@@ -128,6 +128,7 @@ $wgDefaultSkin = "vector";
 
 # Enabled skins.
 # The following skins were automatically enabled:
+wfLoadSkin('MinervaNeue');
 wfLoadSkin('MonoBook');
 wfLoadSkin('Timeless');
 wfLoadSkin('Vector');
@@ -146,12 +147,19 @@ wfLoadExtension('TitleKey');
 wfLoadExtension('PluggableAuth');
 wfLoadExtension('OpenIDConnect');
 
-$wgPluggableAuth_Config[] = [
-    'plugin' => 'OpenIDConnect',
-    'data' => [
-        'providerURL' =>  $_ENV["GAMMA_PROVIDER"],
-        'clientID' =>     $_ENV["GAMMA_CLIENT_ID"],
-        'clientsecret' => $_ENV["GAMMA_CLIENT_SECRET"],
+$wgOpenIDConnect_MigrateUsersByUserName = true;
+$wgPluggableAuth_EnableAutoLogin = true;
+$wgPluggableAuth_EnableLocalLogin = true;
+$wgPluggableAuth_EnableLocalProperties = true;
+$wgPluggableAuth_Config = [
+    "Gamma" => [
+        'plugin' => 'OpenIDConnect',
+        'data' => [
+            'providerURL' =>  $_ENV["GAMMA_PROVIDER"],
+            'clientID' =>     $_ENV["GAMMA_CLIENT_ID"],
+            'clientsecret' => $_ENV["GAMMA_CLIENT_SECRET"],
+            'preferred_username' => 'cid'
+        ]
     ]
 ];
 
@@ -174,6 +182,7 @@ $wgGroupPermissions['user']['bigdelete'] = true;
 $wgGroupPermissions['user']['deletedhistory'] = true;
 $wgGroupPermissions['user']['deletedtext'] = true;
 
+$wgGroupPermissions['*']['autocreateaccount'] = true;
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit'] = false;
 $wgGroupPermissions['*']['read'] = false;
