@@ -143,28 +143,17 @@ wfLoadExtension('TitleKey');
 #################################################################################################################################
 ######################### OAUTH GAMMA ###########################################################################################
 #################################################################################################################################
-wfLoadExtension('MW-OAuth2Client-Gamma');
+wfLoadExtension('PluggableAuth');
+wfLoadExtension('OpenIDConnect');
 
-$wgOAuth2Client['client']['id']     = $_ENV["GAMMA_CLIENT_ID"]; // The client ID assigned to you by the provider
-$wgOAuth2Client['client']['secret'] = $_ENV["GAMMA_CLIENT_SECRET"]; // The client secret assigned to you by the provider
-
-$wgOAuth2Client['configuration']['authorize_endpoint']     = $_ENV["GAMMA_AUTH"]; // Authorization URL
-$wgOAuth2Client['configuration']['access_token_endpoint']  = $_ENV["GAMMA_TOKEN"]; // Token URL
-$wgOAuth2Client['configuration']['api_endpoint']           = $_ENV["GAMMA_USER"]; // URL to fetch user JSON
-$wgOAuth2Client['configuration']['redirect_uri']           = $_ENV["GAMMA_REDIRECT"]; // URL for OAuth2 server to redirect to
-
-$wgOAuth2Client['configuration']['username'] = 'cid'; // JSON path to username
-$wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
-
-$wgOAuth2Client['configuration']['authorized_groups'] = $_ENV["GAMMA_AUTHORIZED_GROUPS"]; // Comma separated list of authorized groups
-// $wgOAuth2Client['configuration']['gamma_authority'] = $_ENV["GAMMA_AUTHORITY"]; // Gamma
-$wgOAuth2Client['configuration']['service_name'] = 'Gamma'; // the name of your service
-$wgOAuth2Client['configuration']['service_login_link_text'] = 'Login with Gamma'; // the text of the login link
-
-$wgOAuth2Client['configuration']['scopes'] = '';
-
-$wgOAuth2Client['configuration']['http_bearer_token'] = 'Bearer'; // Token to use in HTTP Authentication
-$wgOAuth2Client['configuration']['query_parameter_token'] = 'auth_token'; // query parameter to use
+$wgPluggableAuth_Config[] = [
+    'plugin' => 'OpenIDConnect',
+    'data' => [
+        'providerURL' =>  $_ENV["GAMMA_PROVIDER"],
+        'clientID' =>     $_ENV["GAMMA_CLIENT_ID"],
+        'clientsecret' => $_ENV["GAMMA_CLIENT_SECRET"],
+    ]
+];
 
 #################################################################################################################################
 ######################### digITDefault ##########################################################################################
