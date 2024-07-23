@@ -37,7 +37,10 @@ $wgResourceBasePath = $wgScriptPath;
 
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo = $wgScriptPath . '/images/logo.png';
+$wgLogos = [
+    '1x' => $wgScriptPath . '/images/logo.png',
+    'wordmark' => ['src' => $wgScriptPath . '/images/wordmark.png',]
+];
 
 ## UPO means: this is also a user preference option
 
@@ -155,9 +158,9 @@ $wgPluggableAuth_Config = [
     "Gamma" => [
         'plugin' => 'OpenIDConnect',
         'data' => [
-            'providerURL' =>  $_ENV["GAMMA_PROVIDER"],
-            'clientID' =>     $_ENV["GAMMA_CLIENT_ID"],
-            'clientsecret' => $_ENV["GAMMA_CLIENT_SECRET"],
+            'providerURL' =>  $_ENV["PROVIDER_URL"],
+            'clientID' =>     $_ENV["CLIENT_ID"],
+            'clientsecret' => $_ENV["CLIENT_SECRET"],
             'preferred_username' => 'cid'
         ]
     ]
