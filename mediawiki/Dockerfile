@@ -31,10 +31,14 @@ RUN git checkout 4ff9d24
 
 # Install ParserFunctions for MediaWiki 1.39
 WORKDIR /tmp
-#RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_35-47229c6.tar.gz -o ParserFunctions.tar.gz
-RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_38-3209abb.tar.gz -o ParserFunctions.tar.gz
-#RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_39-6f79511.tar.gz -o ParserFunctions.tar.gz
+RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_39-6f79511.tar.gz -o ParserFunctions.tar.gz
 RUN tar -xzf ParserFunctions.tar.gz -C /var/www/html/extensions
 WORKDIR /var/www/html
+
+# Install Citizen skin
+WORKDIR /var/www/html/skins
+RUN git clone https://github.com/StarCitizenTools/mediawiki-skins-Citizen Citizen
+WORKDIR /var/www/html/skins/Citizen
+RUN git checkout 9caf91a
 
 COPY ./LocalSettings.php /var/www/html/

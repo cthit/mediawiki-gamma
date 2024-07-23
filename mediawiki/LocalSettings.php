@@ -140,6 +140,13 @@ wfLoadSkin('Vector');
 # End of automatically generated settings.
 # Add more configuration options below.
 
+// Notifications extensions. Enable when using going to LTS after 1.40
+// wfLoadExtension('Echo');
+// wfLoadExtension('Thanks');
+
+wfLoadExtension('PdfHandler');
+wfLoadExtension('Math');
+wfLoadExtension('MultimediaViewer');
 wfLoadExtension('GetUserName');
 wfLoadExtension('ParserFunctions');
 wfLoadExtension('TitleKey');
