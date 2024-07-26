@@ -7,9 +7,8 @@ services:
     environment:
       GAMMA_CLIENT_ID: OwjtOwnraqUbJEuvdpQ7YTBbIyII4OA11fB4b1woqvVPKxLiQzZ8dl4Alz1WFbHZGpCcBoDhzdm
       GAMMA_CLIENT_SECRET: 3bkxqBQk3POPeEYK8Mbsfu1rw6FhQaNARpfLXe4Cio84FVMSeo1va73TLbPkbtNGFxyhgnm7Q3F
-      GAMMA_PROVIDER: https://auth.chalmers.it
-      GAMMA_AUTHORIZED_GROUPS: superadmin
       WIKI_NAME: digITpedia
+      PROVIDER_URL: https://auth.chalmers.it
       WIKI_PATH: /wiki
       DB_SERVER: wiki-db
       DB_NAME: wiki

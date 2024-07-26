@@ -38,8 +38,13 @@ $wgResourceBasePath = $wgScriptPath;
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
-    '1x' => $wgScriptPath . '/images/logo.png',
-    'wordmark' => ['src' => $wgScriptPath . '/images/wordmark.png',]
+    'icon' => "$wgScriptPath/images/logo.png",
+    '1x' => "$wgScriptPath/images/logo.png",
+    'wordmark' => [
+        'src' => "$wgScriptPath/images/wordmark.png",
+        'width' => 124,
+        'height' => 32
+    ],
 ];
 
 ## UPO means: this is also a user preference option
@@ -127,14 +132,14 @@ $wgDiff3 = "/usr/bin/diff3";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
-$wgDefaultSkin = "vector";
+$wgDefaultSkin = "vector-2022";
 
 # Enabled skins.
-# The following skins were automatically enabled:
 wfLoadSkin('MinervaNeue');
 wfLoadSkin('MonoBook');
 wfLoadSkin('Timeless');
 wfLoadSkin('Vector');
+wfLoadSkin('Citizen');
 
 
 # End of automatically generated settings.
@@ -158,9 +163,9 @@ wfLoadExtension('PluggableAuth');
 wfLoadExtension('OpenIDConnect');
 
 $wgOpenIDConnect_MigrateUsersByUserName = true;
-$wgPluggableAuth_EnableAutoLogin = true;
-$wgPluggableAuth_EnableLocalLogin = true;
-$wgPluggableAuth_EnableLocalProperties = true;
+$wgPluggableAuth_EnableAutoLogin = false;
+$wgPluggableAuth_EnableLocalLogin = $_ENV["ENABLE_LOCAL_LOGIN"] ?? false;
+$wgPluggableAuth_EnableLocalProperties = $_ENV["ENABLE_LOCAL_USER_PROPERTIES"] ?? false;
 $wgPluggableAuth_Config = [
     "Gamma" => [
         'plugin' => 'OpenIDConnect',
@@ -177,8 +182,8 @@ $wgPluggableAuth_Config = [
 ######################### digITDefault ##########################################################################################
 #################################################################################################################################
 
-# Whitelist oauth login page
-$wgWhitelistRead = ['Special:OAuth2Client', 'Special:OAuth2Client/redirect'];
+# Whitelist for read access
+$wgWhitelistRead = [];
 
 
 # Allow normal users to move pages etc.
