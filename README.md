@@ -31,20 +31,20 @@ If you are upgrading from version < 1.39, you will need to run the upgrade scrip
 
 The following environment variables can be set to configure the wiki:
 
-| Variable                       | Description                                      | Example                    |
-| ------------------------------ | ------------------------------------------------ | -------------------------- |
-| `PROVIDER_URL`                 | The URL of the Gamma provider                    | `https://auth.chalmers.it` |
-| `CLIENT_ID`                    | The client ID of the provider                    | `123456`                   |
-| `CLIENT_SECRET`                | The client secret of the provider                | `abcdef`                   |
-| `WIKI_NAME`                    | The name of the wiki                             | `My Wiki`                  |
-| `WIKI_PATH`                    | The root path of the wiki                        | `/wiki`                    |
-| `ROOT_URL`                     | The root URL of the wiki                         | `https://wiki.chalmers.it` |
-| `DB_SERVER`                    | URL to the database                              | `db`                       |
-| `DB_NAME`                      | The database name to use                         | `wiki`                     |
-| `DB_USER`                      | Username to access database                      | `wiki`                     |
-| `DB_PASSWORD`                  | Password to access database                      | `password`                 |
-| `DB_PREFIX`                    | Prefix to be used when addressing database.      | `mw_`                      |
-| `SECRET_KEY`                   | The secret key for the wiki                      | `secret`                   |
-| `UPGRADE_KEY`                  | The upgrade key for the wiki. Used for installs. | `123456`                   |
-| `ENABLE_LOCAL_LOGIN`           | Enable local login for the wiki.                 | `false`                    |
-| `ENABLE_LOCAL_USER_PROPERTIES` | Allow users to edit their own properties.        | `false`                    |
+| Variable                       | Description                                      | Default    | Example                    |
+| ------------------------------ | ------------------------------------------------ | ---------- | -------------------------- |
+| `PROVIDER_URL`                 | The URL of the Gamma provider                    | (Required) | `https://auth.chalmers.it` |
+| `CLIENT_ID`                    | The client ID of the provider                    | (Required) | `123456`                   |
+| `CLIENT_SECRET`                | The client secret of the provider                | (Required) | `abcdef`                   |
+| `WIKI_NAME`                    | The name of the wiki                             | (Required) | `My Wiki`                  |
+| `WIKI_PATH`                    | The root path of the wiki                        | (Required) | `/wiki`                    |
+| `ROOT_URL`                     | The root URL of the wiki                         | (Required) | `https://wiki.chalmers.it` |
+| `DB_SERVER`                    | URL to the database                              | (Required) | `db`                       |
+| `DB_NAME`                      | The database name to use                         | (Required) | `wiki`                     |
+| `DB_USER`                      | Username to access database                      | (Required) | `wiki`                     |
+| `DB_PASSWORD`                  | Password to access database                      | (Required) | `password`                 |
+| `DB_PREFIX`                    | Prefix to be used when addressing database.      | (Required) | `mw_`                      |
+| `SECRET_KEY`                   | The secret key for the wiki                      | (Required) | `secret`                   |
+| `UPGRADE_KEY`                  | The upgrade key for the wiki. Used for installs. | (Required) | `123456`                   |
+| `ENABLE_LOCAL_LOGIN`           | Enable local login for the wiki.                 | `false`    | `false`                    |
+| `ENABLE_LOCAL_USER_PROPERTIES` | Allow users to edit their own properties.        | `false`    | `false`                    |
