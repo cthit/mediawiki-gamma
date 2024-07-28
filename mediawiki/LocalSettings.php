@@ -37,7 +37,18 @@ $wgResourceBasePath = $wgScriptPath;
 
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo = $wgScriptPath . '/images/logo.png';
+$wgLogos = [
+    'icon' => "$wgScriptPath/images/logo.png",
+    '1x' => "$wgScriptPath/images/logo.png",
+];
+
+if ( $_ENV["USE_WORDMARK"] ?? false ) {
+    $wgLogos['wordmark'] = [
+        'src' => "$wgScriptPath/images/wordmark.png",
+        'width' => $_ENV["WORDMARK_WIDTH"] ?? 124,
+        'height' => $_ENV["WORDMARK_HEIGHT"] ?? 32
+    ];
+}
 
 ## UPO means: this is also a user preference option
 
@@ -124,18 +135,26 @@ $wgDiff3 = "/usr/bin/diff3";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
-$wgDefaultSkin = "vector";
+$wgDefaultSkin = "vector-2022";
 
 # Enabled skins.
-# The following skins were automatically enabled:
+wfLoadSkin('MinervaNeue');
 wfLoadSkin('MonoBook');
 wfLoadSkin('Timeless');
 wfLoadSkin('Vector');
+wfLoadSkin('Citizen');
 
 
 # End of automatically generated settings.
 # Add more configuration options below.
 
+// Notifications extensions. Enable when using going to LTS after 1.40
+// wfLoadExtension('Echo');
+// wfLoadExtension('Thanks');
+
+wfLoadExtension('PdfHandler');
+wfLoadExtension('Math');
+wfLoadExtension('MultimediaViewer');
 wfLoadExtension('GetUserName');
 wfLoadExtension('ParserFunctions');
 wfLoadExtension('TitleKey');
@@ -143,35 +162,31 @@ wfLoadExtension('TitleKey');
 #################################################################################################################################
 ######################### OAUTH GAMMA ###########################################################################################
 #################################################################################################################################
-wfLoadExtension('MW-OAuth2Client-Gamma');
+wfLoadExtension('PluggableAuth');
+wfLoadExtension('OpenIDConnect');
 
-$wgOAuth2Client['client']['id']     = $_ENV["GAMMA_CLIENT_ID"]; // The client ID assigned to you by the provider
-$wgOAuth2Client['client']['secret'] = $_ENV["GAMMA_CLIENT_SECRET"]; // The client secret assigned to you by the provider
-
-$wgOAuth2Client['configuration']['authorize_endpoint']     = $_ENV["GAMMA_AUTH"]; // Authorization URL
-$wgOAuth2Client['configuration']['access_token_endpoint']  = $_ENV["GAMMA_TOKEN"]; // Token URL
-$wgOAuth2Client['configuration']['api_endpoint']           = $_ENV["GAMMA_USER"]; // URL to fetch user JSON
-$wgOAuth2Client['configuration']['redirect_uri']           = $_ENV["GAMMA_REDIRECT"]; // URL for OAuth2 server to redirect to
-
-$wgOAuth2Client['configuration']['username'] = 'cid'; // JSON path to username
-$wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
-
-$wgOAuth2Client['configuration']['authorized_groups'] = $_ENV["GAMMA_AUTHORIZED_GROUPS"]; // Comma separated list of authorized groups
-// $wgOAuth2Client['configuration']['gamma_authority'] = $_ENV["GAMMA_AUTHORITY"]; // Gamma
-$wgOAuth2Client['configuration']['service_name'] = 'Gamma'; // the name of your service
-$wgOAuth2Client['configuration']['service_login_link_text'] = 'Login with Gamma'; // the text of the login link
-
-$wgOAuth2Client['configuration']['scopes'] = '';
-
-$wgOAuth2Client['configuration']['http_bearer_token'] = 'Bearer'; // Token to use in HTTP Authentication
-$wgOAuth2Client['configuration']['query_parameter_token'] = 'auth_token'; // query parameter to use
+$wgOpenIDConnect_MigrateUsersByUserName = true;
+$wgPluggableAuth_EnableAutoLogin = false;
+$wgPluggableAuth_EnableLocalLogin = $_ENV["ENABLE_LOCAL_LOGIN"] ?? false;
+$wgPluggableAuth_EnableLocalProperties = $_ENV["ENABLE_LOCAL_USER_PROPERTIES"] ?? false;
+$wgPluggableAuth_Config = [
+    "Gamma" => [
+        'plugin' => 'OpenIDConnect',
+        'data' => [
+            'providerURL' =>  $_ENV["PROVIDER_URL"],
+            'clientID' =>     $_ENV["CLIENT_ID"],
+            'clientsecret' => $_ENV["CLIENT_SECRET"],
+            'preferred_username' => 'cid'
+        ]
+    ]
+];
 
 #################################################################################################################################
 ######################### digITDefault ##########################################################################################
 #################################################################################################################################
 
-# Whitelist oauth login page
-$wgWhitelistRead = ['Special:OAuth2Client', 'Special:OAuth2Client/redirect'];
+# Whitelist for read access
+$wgWhitelistRead = [];
 
 
 # Allow normal users to move pages etc.
@@ -185,6 +200,7 @@ $wgGroupPermissions['user']['bigdelete'] = true;
 $wgGroupPermissions['user']['deletedhistory'] = true;
 $wgGroupPermissions['user']['deletedtext'] = true;
 
+$wgGroupPermissions['*']['autocreateaccount'] = true;
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit'] = false;
 $wgGroupPermissions['*']['read'] = false;

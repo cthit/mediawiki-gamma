@@ -1,20 +1,14 @@
-version: "3"
 services:
   wiki:
     build:
       context: mediawiki
       dockerfile: Dockerfile
-    image: cthit/mediawiki:latest
+    image: ghcr.io/cthit/mediawiki-gamma:latest
     environment:
-      GAMMA_CLIENT_ID: OwjtOwnraqUbJEuvdpQ7YTBbIyII4OA11fB4b1woqvVPKxLiQzZ8dl4Alz1WFbHZGpCcBoDhzdm
-      GAMMA_CLIENT_SECRET: 3bkxqBQk3POPeEYK8Mbsfu1rw6FhQaNARpfLXe4Cio84FVMSeo1va73TLbPkbtNGFxyhgnm7Q3F
-      GAMMA_AUTH: http://localhost:3000/api/oauth/authorize
-      GAMMA_TOKEN: http://gamma-backend:8081/api/oauth/token
-      GAMMA_USER: http://gamma-backend:8081/api/users/me
-      GAMMA_REDIRECT: http://localhost:4000/wiki/index.php/Special:OAuth2Client/callback
-      # GAMMA_AUTHORITY: admin
-      GAMMA_AUTHORIZED_GROUPS: superadmin
       WIKI_NAME: digITpedia
+      CLIENT_ID: PLACEHOLDER_ID
+      CLIENT_SECRET: PLACEHOLDER_SECRET
+      PROVIDER_URL: https://auth.chalmers.it
       WIKI_PATH: /wiki
       DB_SERVER: wiki-db
       DB_NAME: wiki
@@ -24,9 +18,6 @@ services:
       SECRET_KEY: dasdasdasd
       UPGRADE_KEY: dasd
       ROOT_URL: http://localhost:4000
-    networks:
-      - default
-      - gamma
     ports:
       - 4001:80
     volumes:
@@ -41,8 +32,6 @@ services:
       WIKI_PATH: wiki
       WIKI_HOST: wiki
     image: cthit/mediawiki-proxy:latest
-    networks:
-      - default
     ports:
       - 4000:80
 
@@ -53,13 +42,5 @@ services:
       MYSQL_DATABASE: wiki
       MYSQL_PASSWORD: wiki
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-    networks:
-      - default
-      - gamma
     volumes:
       - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
-
-networks:
-  default:
-  gamma:
-    external: true
