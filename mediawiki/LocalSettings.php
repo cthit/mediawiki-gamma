@@ -40,12 +40,15 @@ $wgResourceBasePath = $wgScriptPath;
 $wgLogos = [
     'icon' => "$wgScriptPath/images/logo.png",
     '1x' => "$wgScriptPath/images/logo.png",
-    'wordmark' => [
-        'src' => "$wgScriptPath/images/wordmark.png",
-        'width' => 124,
-        'height' => 32
-    ],
 ];
+
+if ( $_ENV["USE_WORDMARK"] ?? false ) {
+    $wgLogos['wordmark'] = [
+        'src' => "$wgScriptPath/images/wordmark.png",
+        'width' => $_ENV["WORDMARK_WIDTH"] ?? 124,
+        'height' => $_ENV["WORDMARK_HEIGHT"] ?? 32
+    ];
+}
 
 ## UPO means: this is also a user preference option
 
