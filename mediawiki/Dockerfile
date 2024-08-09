@@ -31,7 +31,7 @@ RUN git checkout 4ff9d24
 
 # Install ParserFunctions for MediaWiki 1.39
 WORKDIR /tmp
-RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_39-027c595.tar.gz -o ParserFunctions.tar.gz
+RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_39-7fa883d.tar.gz -o ParserFunctions.tar.gz
 RUN tar -xzf ParserFunctions.tar.gz -C /var/www/html/extensions
 WORKDIR /var/www/html
 
@@ -42,3 +42,4 @@ WORKDIR /var/www/html/skins/Citizen
 RUN git checkout 9caf91a
 
 COPY ./LocalSettings.php /var/www/html/
+WORKDIR /var/www/html
