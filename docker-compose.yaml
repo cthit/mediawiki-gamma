@@ -18,6 +18,8 @@ services:
       SECRET_KEY: dasdasdasd
       UPGRADE_KEY: dasd
       ROOT_URL: http://localhost:4000
+    depends_on:
+      - wiki-db
     ports:
       - 4001:80
     volumes:
