@@ -37,13 +37,13 @@ The following environment variables can be set to configure the wiki:
 | `CLIENT_ID`                    | The client ID of the provider                                  | (Required) | `123456`                   |
 | `CLIENT_SECRET`                | The client secret of the provider                              | (Required) | `abcdef`                   |
 | `WIKI_NAME`                    | The name of the wiki                                           | (Required) | `My Wiki`                  |
-| `WIKI_PATH`                    | The root path of the wiki                                      | (Required) | `/wiki`                    |
+| `WIKI_PATH`                    | The root path of the wiki                                      | `""`       | `/wiki`                    |
 | `ROOT_URL`                     | The root URL of the wiki                                       | (Required) | `https://wiki.chalmers.it` |
 | `DB_SERVER`                    | URL to the database                                            | (Required) | `db`                       |
 | `DB_NAME`                      | The database name to use                                       | (Required) | `wiki`                     |
 | `DB_USER`                      | Username to access database                                    | (Required) | `wiki`                     |
 | `DB_PASSWORD`                  | Password to access database                                    | (Required) | `password`                 |
-| `DB_PREFIX`                    | Prefix to be used when addressing database.                    | (Required) | `mw_`                      |
+| `DB_PREFIX`                    | Prefix to be used when addressing database.                    | `mw_`      | `wiki_`                    |
 | `SECRET_KEY`                   | The secret key for the wiki                                    | (Required) | `secret`                   |
 | `UPGRADE_KEY`                  | The upgrade key for the wiki. Used for installs.               | (Required) | `123456`                   |
 | `ENABLE_LOCAL_LOGIN`           | Enable local login for the wiki.                               | `false`    | `false`                    |

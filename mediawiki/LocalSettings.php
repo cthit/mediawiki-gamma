@@ -27,17 +27,16 @@ $wgMetaNamespace = $_ENV["WIKI_NAME"];
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = $_ENV["WIKI_PATH"];
+$wgScriptPath = $_ENV["WIKI_PATH"] ?? "";
 
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = $_ENV["ROOT_URL"];
 
-## The URL path to static resources (images, scripts, etc.)
-$wgResourceBasePath = $wgScriptPath;
+# The base URL that is used to construct all internal links
+# Normally points to the main index.php script. Can be relative or absolute
+$wgArticlePath = "$wgScriptPath/$1";
 
-$wgArticlePath = $wgScriptPath . "/$1";
-
-## The URL paths to the logo.  Make sure you change this from the default,
+## The URL paths to the logo. Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
     'icon' => "$wgScriptPath/images/logo.png",
@@ -72,7 +71,7 @@ $wgDBuser = $_ENV["DB_USER"];
 $wgDBpassword = $_ENV["DB_PASSWORD"];
 
 # MySQL specific settings
-$wgDBprefix = $_ENV["DB_PREFIX"];
+$wgDBprefix = $_ENV["DB_PREFIX"] ?? "mw_";
 
 # MySQL table options to use during installation or update
 $wgDBTableOptions = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
