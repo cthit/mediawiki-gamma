@@ -29,9 +29,7 @@ http {
     }
 
     location /${WIKI_PATH} {
-      # Trailing slash is important, strips the location before forwarding,
-      # if location is /wiki, a request to /wiki/a would be forwarded to /a
-      proxy_pass http://wiki/;
+      proxy_pass http://wiki;
     }
   }
 }
