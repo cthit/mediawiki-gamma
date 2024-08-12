@@ -42,7 +42,7 @@ WORKDIR /var/www/html/skins/Citizen
 RUN git checkout 9caf91a
 
 # See https://www.mediawiki.org/wiki/Topic:Weqepsq3e8po62y1
-COPY ./apache-wiki-directory.conf /etc/apache2/sites-available/000-default.conf
+COPY ./apache-custom-directory.conf /etc/apache2/sites-available/000-default.conf
 
 COPY ./LocalSettings.php /var/www/html/
 WORKDIR /var/www/html
