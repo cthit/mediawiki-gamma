@@ -1,4 +1,4 @@
-FROM mediawiki:1.39
+FROM mediawiki:1.43
 
 # Various dependencies for composer
 RUN apt update && apt install zip unzip
