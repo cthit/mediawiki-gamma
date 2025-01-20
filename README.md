@@ -26,7 +26,12 @@ More information about this update script can be found in MediaWiki's [documenta
 
 ## Upgrading from Previous Versions
 
-If you are upgrading from version < 1.39, you will need to run the upgrade script to create new database tables used by new extensions: `php maintenance/update.php`.
+For most versions, you need to run the update script so that the database schema is correct.
+Depending on which version you are upgrading from, you may need to run the upgrade script:
+- **<= 1.39**: Run `php maintenance/update.php`
+- **>= 1.40**: Run `php maintenance/run.php update`
+
+If the update script gives an error that the database version is older than 1.35, run the wiki setup as noted above.
 
 ## Configuration
 

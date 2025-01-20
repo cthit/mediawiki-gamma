@@ -1,4 +1,4 @@
-FROM mediawiki:1.39
+FROM mediawiki:1.43
 
 # Various dependencies for composer
 RUN apt update && apt install zip unzip
@@ -27,11 +27,11 @@ RUN git checkout 1f08a13
 WORKDIR /var/www/html/extensions
 RUN git clone https://github.com/wikimedia/mediawiki-extensions-TitleKey TitleKey
 WORKDIR /var/www/html/extensions/TitleKey
-RUN git checkout 4ff9d24
+RUN git checkout d78e4f8
 
-# Install ParserFunctions for MediaWiki 1.39
+# Install ParserFunctions for MediaWiki 1.43
 WORKDIR /tmp
-RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_39-1ce7bc0.tar.gz -o ParserFunctions.tar.gz
+RUN curl -L https://extdist.wmflabs.org/dist/extensions/ParserFunctions-REL1_43-f0eae24.tar.gz -o ParserFunctions.tar.gz
 RUN tar -xzf ParserFunctions.tar.gz -C /var/www/html/extensions
 WORKDIR /var/www/html
 
@@ -39,7 +39,7 @@ WORKDIR /var/www/html
 WORKDIR /var/www/html/skins
 RUN git clone https://github.com/StarCitizenTools/mediawiki-skins-Citizen Citizen
 WORKDIR /var/www/html/skins/Citizen
-RUN git checkout 9caf91a
+RUN git checkout 524b174
 
 # See https://www.mediawiki.org/wiki/Topic:Weqepsq3e8po62y1
 COPY ./apache-custom-directory.conf /etc/apache2/sites-available/000-default.conf
